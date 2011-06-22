@@ -29,6 +29,8 @@ for f in *; do
         continue
     elif [[ 'pack.sh' == "$f" ]]; then
         continue
+    elif [[ 'README.md' == "$f" ]]; then
+        continue
     fi
     cp -R "$f" "$PACK/$f"
 done
