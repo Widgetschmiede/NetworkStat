@@ -8,7 +8,7 @@
 
 // Globals
 var _sections = new Array("options", "ping", "about");
-var _wanIPWebsite = "http://www.whatismyip.com/automation/n09230945.asp";		// previously used http://www.whatismyip.org/
+var _wanIPWebsite = "http://automation.whatismyip.com/n09230945.asp";
 
 var original_timer = getTimer();
 var seconds_left = original_timer;						// seconds left till next refresh
@@ -315,8 +315,8 @@ function receiveWAN(external) {
 				seconds_already_set = true;
 			}
 			else {
-				external = "error (see Console)";
 				alert("NetworkStat got the following response in order of an IP address:\n" + external);
+				external = "error (see Console)";
 			}
 		}
 
