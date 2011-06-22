@@ -1,0 +1,196 @@
+<!--
+Copyright 2005-2006, Widgetschmie.de.
+
+This Widget is Freeware and will always be. However, if you`d like to use some of its code, please tell me at "help.you.i.can@gmail.com"
+-->
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+
+<link id="stylesheet_basic" rel="stylesheet" type="text/css" href="Basic.css" />
+<link id="stylesheet_themed" rel="stylesheet" type="text/css" href="NetworkStat_1.css" />
+
+<!--script type="text/javascript" src="localizedStrings.js" charset="utf-8" /-->
+<script type="text/javascript" src="./simpleAjaxRequest.js" charset="utf-8" />
+<script type="text/javascript" src="./Utilities.js" charset="utf-8" />
+<script type="text/javascript" src="./versioncheck.js" charset="utf-8" />
+<script type="text/javascript" src="./PrefFunctions.js" charset="utf-8" />
+<script type="text/javascript" src="./NetworkStat.js" charset="utf-8" />
+<script type="text/javascript" src="file:///System/Library/WidgetResources/button/genericButton.js" charset="utf-8" />
+</head>
+
+<body onload="setup()">
+<div id="front" onmousemove="mousemove(event)" onmouseout="mouseexit(event)">
+	
+	<!-- TOP -->
+	<div id="top">
+		<div id="info_refresh" class="refr_info" onclick="blendFromTo('info_refresh', 'info_lastrefresh')">refresh <span id="timer">in the far future</span></div>
+		<div id="info_lastrefresh" class="refr_info" onclick="blendFromTo('info_lastrefresh', 'info_refresh')">last refresh <span id="lastRefresh">unknown</span></div>
+		
+		<div id="location_div">
+			<img id="change_location_cover" src="./Images_1/Home.png" alt="change" />
+			<select id="change_location_menu" name="change_location_menu" onchange="changeLocation(this.options[this.selectedIndex].value)"></select>
+			<a id="location" class="data_big" href="javascript:toClipboard(document.getElementById('location').innerHTML);"></a>
+		</div>
+		
+		<img id="refreshbutton" src="./Images_1/refresh.png" alt="refresh now" title="refresh now" onmouseover="this.src='./Images_' + stylesheet + '/refresh_hover.png'" onmouseout="this.src='./Images_' + stylesheet + '/refresh.png'" onclick="javascript:refreshState();" />
+	</div>
+	
+	<!-- MAIN -->
+	<div id="main">
+		<div id="maincontent">	
+			<p class="internal">
+				<img class="interface_img" src="./Images_1/None.png" />
+				<span class="data_big">not checked</span>
+			</p>
+		</div>
+	</div>
+	
+	<div id="bottom">
+		<div id="fliprollie" class="flip"></div>
+		<div id="flip" class="flip" onclick="exitflip(event); showPrefs();" onmouseover="enterflip(event);" onmouseout="exitflip(event);"></div>
+	</div>
+</div>
+
+
+<div id="back">
+	<div class="tabbar">
+		<div id="tab_options" class="tabitem" onclick="switchPrefTab('options')">
+			<div class="bevelTop"></div>
+			<div class="bevelLeft"></div>
+			<div class="bevelRight"></div>
+			<div class="bevelTopLeft"></div>
+			<div class="bevelTopRight"></div>
+			Options
+		</div>
+		<div id="tab_ping" class="tabitem" onclick="switchPrefTab('ping')">
+			<div class="bevelTop"></div>
+			<div class="bevelLeft"></div>
+			<div class="bevelRight"></div>
+			<div class="bevelTopLeft"></div>
+			<div class="bevelTopRight"></div>
+			Ping &amp; Mail
+		</div>
+		<div id="tab_about" class="tabitem" onclick="switchPrefTab('about')">
+			<div class="bevelTop"></div>
+			<div class="bevelLeft"></div>
+			<div class="bevelRight"></div>
+			<div class="bevelTopLeft"></div>
+			<div class="bevelTopRight"></div>
+			Help
+		</div>
+	</div>
+	
+	<form id="prefform" name="prefform" method="get" onsubmit="savePrefs(); return false;">
+		<div class="bevelTop"></div>
+		<div class="bevelBottom"></div>
+		<div class="bevelLeft"></div>
+		<div class="bevelRight"></div>
+		<div class="bevelTopLeft"></div>
+		<div class="bevelTopRight"></div>
+		<div class="bevelBottomLeft"></div>
+		<div class="bevelBottomRight"></div>
+		
+		<div id="prefs_options" class="prefsection">
+			<div class="rightprefitem">
+				Refresh <select id="timer_select" name="timer">
+					<option value="manual">manually</option>
+					<option value="86400">every 24 hours</option>
+					<option value="28800">every 8 hours</option>
+					<option value="14400">every 4 hours</option>
+					<option value="7200">every 2 hours</option>
+					<option value="3600">every hour</option>
+					<option value="1800">every half hour</option>
+					<option value="900">every 15 minutes</option>
+					<option value="600">every 10 minutes</option>
+					<option value="300">every 5 minutes</option>
+					<!--option value="30">every 30 seconds</option-->
+				</select>
+			</div>
+			<input type="checkbox" name="onshow" value="1" /> <span onclick="selectVal(this)">refresh on activation (not recommended)</span>
+			
+			<hr />
+			
+			<input type="checkbox" name="showAllInterfaces" value="1" /> <span onclick="selectVal(this)">show inactive interfaces</span>
+			<hr />
+			
+			<div class="rightprefitem">
+				Widget Style <select name="style" class="styleselect">
+					<option value="1">Terminal</option>
+					<option value="2">Black Aqua</option>
+					<option value="3">Tool Window</option>
+				</select><br />
+				Date format <select name="dateformat" class="styleselect">
+					<option value="eu">28.03.2006 (eu)</option>
+					<option value="us">3/28/2006 (us)</option>
+				</select>
+			</div>
+		</div>
+		
+		
+		<div id="prefs_ping" class="prefsection">
+			Enter a (valid) IP to ping<br />
+			<input type="text" name="ping_ip" value="" size="21" /> <input type="button" value="reset" onclick="document.forms[0].ping_ip.value = '4.2.2.2'" />
+			
+			<hr />
+			
+			<input type="checkbox" name="mail_notification_on" value="true" /> <span onclick="selectVal(this)">Notify IP-changes to</span><br />
+			<div id="notification_mail_setup_warning" class="padBox" style="display:block;"><img class="exclamIcon" src="Images/exclamationMark.png" alt="(!)" />You need to setup <a href="javascript:startMail()">Mail.app</a> to send notification mails.</div>
+			<div id="notification_mail_setup_input" style="display:none;">
+				<textarea name="notification_mail" rows="3" style="width:100%;"></textarea><br />
+				<span class="faded">(one address per line)</span><br />
+				<input id="testmail_send_button" type="button" value="send testmail to first address" lang="send testmail to first address" onclick="sendTestMailClicked()" />
+			</div>
+			<div id="notification_mail_failed" class="padBox" style="display:none;"><img class="exclamIcon" src="Images/exclamationMark.png" alt="(!)" />The email could not be sent.</div>
+		</div>
+		
+		
+		<div id="prefs_about" class="prefsection">
+			<div id="helpdiv">
+				<div class="help_subtitle">Network Stat</div>
+				<div class="help_section">
+				© 2005-2007 by  <a href="javascript:if(window.widget) widget.openURL('http://widgetschmie.de/');" title="visit developers website">Widgetschmie.de</a></div>
+				
+				<div class="help_section">
+				This widget shows you information about your network interfaces and their current setup. Data should be self-explanatory for the most part, the basics:<ul>
+					<li>Click any link on the frontside to copy the clicked information to the clipboard</li>
+					<li>Click the house icon to switch the network location</li>
+					<li>Click any interface icon to toggle more information</li>
+				</ul>
+				</div>
+				
+				<div class="help_subtitle">WAN IP check</div>
+				<div class="help_section">The widget checks your WAN IP by asking the server www.whatismyip.org.</div>
+				
+				<div class="help_subtitle">Refreshing</div>
+				<div class="help_section">Set your preferred refresh interval in the preferences. You can force a refresh at any time by clicking the refresh-arrow top right. Click the timer on top of the widget to see the date and time of the last refresh. Click it again to return to the countdown.</div>
+				
+				<div class="help_subtitle">Ping</div>
+				<div class="help_section">Enter an IP to ping after checking your WAN IP. Default IP is 4.2.2.2 which represents a popular DNS server.<br />
+				You can ping your gateway either by entering its IP here or much simpler by clicking the "ping"-button under the respective interface information.</div>
+				
+				<div class="help_subtitle">Mail</div>
+				<div class="help_section">You can provide one or multiple email addresses where the widget will send an email to notify the new WAN IP. For this feature to work you need to setup at least one account in Mail.app. To confirm this feature to work press the "send testmail to first address" button which does exactly what you think it does.</div>
+				
+				<div class="help_subtitle">Thanks</div>
+				<div class="help_section">Many people contributed to this widget by sending bug reports or great feature requests, like the refresh-on-wake by John Cochrane. Some like Simon Pierre Desrosiers, Russel B. and particularly Warren Liu did extensive testing; thank you guys, you helped a lot to improve this widget!</div>
+				
+				<br />
+			</div>
+		</div>
+		
+	</form>
+	
+	<div class="version">
+		<a id="infolink" href="javascript:if(window.widget){widget.openURL('http://widgetschmie.de/widgets/NetworkStat/');}" title="visit developers website"><img src="Images/Amboss.png" alt="widgetschmie.de" /></a><span id="infospan">??</span><br />
+		<a id="latestinfo" href="javascript:checkLatestVersion('latestinfo');">check version</a>
+	</div>
+	<div id="done" class="done"></div>
+</div>
+</body>
+</html>

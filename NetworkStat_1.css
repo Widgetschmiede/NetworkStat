@@ -1,0 +1,47 @@
+/*  
+Copyright 2005/2006, Pascal Pfiffner.
+*/
+
+
+/* front */
+#front { width:250px; min-height:100px; padding:0px; display:block; position:relative; font:normal 10px Arial; color:rgb(50,130,230); text-shadow:#14A 0px 0px 2px; }
+#front a { color:#F7B; text-decoration:none; text-shadow:none; }
+#front a:hover { text-decoration:underline; text-shadow:none; }
+
+
+/* Main front classes */
+.data { font-weight:bold; text-shadow:#A06 0px 0px 2px; }
+.data_big { font:bold 18px Arial; text-shadow:#A06 0px 0px 5px; }
+.inactive { font:bold 18px Arial; text-shadow:#14A 0px 0px 5px; }
+
+.interface_main_sub { padding:0px 0px 5px; }
+.interface_more_sub { position:absolute; left:4px; right:4px; bottom:0px; padding:0px 0px 15px; }
+
+.sub_title { margin:10px 0px 0px; color:rgb(135,185,255); text-shadow:#000 0px 0px 3px; font-style:italic; }
+.sub_body {  }
+
+.smallest { font-size:9px; color:#FFF; }
+
+/* refresh and location */
+#top { position:relative; height:42px; padding:14px 24px 0px; font:bold small-caps 10px Arial; background:url(./Images_1/Top.png) top left no-repeat; }
+#info_refresh { display:block; cursor:pointer; }
+#info_lastrefresh { display:none; cursor:pointer; }
+.refr_info {  }
+#location_div { position:relative; padding:5px 0px 0px; }
+#location { position:absolute; left:40px; width:158px; height:20px; overflow:hidden; }
+#change_location_menu { position:absolute; left:0px; width:30px; height:20px; margin:0px; padding:0px; opacity:0; }
+#change_location_cover { position:absolute; left:0px; width:30px; height:20px; border:none; }
+#refreshbutton { position:absolute; top:13px; right:21px; width:30px; height:20px; border:none; }
+
+/* ip display */
+#main { position:relative; width:202px; padding:0px 24px; background:url(./Images_1/Repeat.png) top left repeat-y; overflow:hidden; }
+.interface_img { margin:0px 10px 0px 0px; width:30px; height:20px; vertical-align:top; border:none; }
+.interface_unknownname { display:inline-block; width:30px; height:18px; margin:2px 8px 0px 2px; color:rgb(64,159,235); font-size:16px; font-weight:bold; text-shadow:#14A 0px 0px 5px; vertical-align:top; text-align:center; }
+	.interface_unknownname:hover { color:#000; }
+.pingButton { float:right; width:35px; height:14px; }
+
+#bottom { position:relative; width:250px; height:22px; background:url(./Images_1/Bottom.png) top left no-repeat; }
+#flip { opacity:0; background:url(/System/Library/WidgetResources/ibutton/white_i.png) no-repeat top left; z-index:8000; }
+#fliprollie { opacity:0.25; background:url(/System/Library/WidgetResources/ibutton/white_rollie.png) no-repeat top left; z-index:7999; display:none; }
+.flip { position:absolute; bottom:22px; right:22px; width:13px; height:13px; }
+
