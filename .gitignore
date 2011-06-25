@@ -2,3 +2,9 @@
 SystemConfiguration.widgetplugin
 NetworkStat.wdgt
 
+*.pbxuser
+*.perspective
+*.perspectivev3
+*.mode?
+*.mode?v?
+xcuserdata
