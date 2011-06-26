@@ -21,6 +21,7 @@
 - (NSString*)IDOfConfigurationNamed:(NSString*)name;
 - (void)copyStringToClipboard:(NSString*)string;
 
+- (BOOL)hasMailingPotential;
 - (BOOL)isMailConfigured;
 - (BOOL)sendMail:(NSString*)message to:(NSString*)addresses subj:(NSString*)subject;
 

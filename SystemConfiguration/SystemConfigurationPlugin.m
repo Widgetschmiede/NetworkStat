@@ -18,6 +18,7 @@
 	if (aSel == @selector(nameOfActiveConfiguration)) return NO;
 	if (aSel == @selector(namesOfAllConfigurations)) return NO;
 	if (aSel == @selector(IDOfConfigurationNamed:)) return NO;
+	if (aSel == @selector(hasMailingPotential)) return NO;
 	if (aSel == @selector(isMailConfigured)) return NO;
 	if (aSel == @selector(sendMail:to:subj:)) return NO;
 	if (aSel == @selector(copyStringToClipboard:)) return NO;
@@ -35,6 +36,7 @@
 	if (aSel == @selector(nameOfActiveConfiguration)) retval = @"nameOfActiveConfiguration";
 	else if (aSel == @selector(namesOfAllConfigurations)) retval = @"namesOfAllConfigurations";
 	else if (aSel == @selector(IDOfConfigurationNamed:)) retval = @"IDOfConfigurationNamed";
+	else if (aSel == @selector(hasMailingPotential)) retval = @"hasMailingPotential";
 	else if (aSel == @selector(isMailConfigured)) retval = @"isMailConfigured";
 	else if (aSel == @selector(sendMail:to:subj:)) retval = @"sendMail";
 	else if (aSel == @selector(copyStringToClipboard:)) retval = @"copyStringToClipboard";
@@ -125,6 +127,12 @@
 		}
 	}
 	return result;
+}
+
+- (BOOL)hasMailingPotential
+{
+	Class mailDelivery = NSClassFromString(@"NSMailDelivery");
+	return (NULL != mailDelivery);
 }
 
 - (BOOL)isMailConfigured

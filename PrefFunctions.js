@@ -1,7 +1,7 @@
 
 /*
  ********************
- *  Pref Functions  *
+ *	Pref Functions	*
  * © Widgetschmiede *
  ********************
  */
@@ -128,20 +128,33 @@ function adjustPrefs() {
 	if(showAllInterfaces)
 		document.forms[0].showAllInterfaces.checked = true;
 	
-	// notification
-	if(window.widget && SystemConfigurationPlugin.isMailConfigured()) {
-		document.forms[0].mail_notification_on.checked = mail_notification_on ? true : false;
-		document.forms[0].notification_mail.value = getNotificationAddressesBlank();
-		try {
-			getObj('notification_mail_setup_warning').style.display = 'none';
-			getObj('notification_mail_setup_input').style.display = 'block';
+	// notifications
+	if (window.widget && SystemConfigurationPlugin.hasMailingPotential()) {
+		if (SystemConfigurationPlugin.isMailConfigured()) {
+			document.forms[0].mail_notification_on.checked = mail_notification_on ? true : false;
+			document.forms[0].notification_mail.value = getNotificationAddressesBlank();
+			try {
+    			getObj('notification_mail_not_available').style.display = 'none';
+				getObj('notification_mail_setup_warning').style.display = 'none';
+				getObj('notification_mail_setup_input').style.display = 'block';
+			}
+			catch(exc) {  }
 		}
-		catch(exc) {  }
+		else {
+			document.forms[0].mail_notification_on.disabled = true;
+			try {
+	    		getObj('notification_mail_not_available').style.display = 'none';
+				getObj('notification_mail_setup_warning').style.display = 'block';
+				getObj('notification_mail_setup_input').style.display = 'none';
+			}
+			catch(exc) {  }
+		}
 	}
 	else {
 		document.forms[0].mail_notification_on.disabled = true;
 		try {
-			getObj('notification_mail_setup_warning').style.display = 'block';
+			getObj('notification_mail_not_available').style.display = 'block';
+			getObj('notification_mail_setup_warning').style.display = 'none';
 			getObj('notification_mail_setup_input').style.display = 'none';
 		}
 		catch(exc) {  }
@@ -222,7 +235,7 @@ function showPrefs() {
 	back.style.display = "block";
 		
 	if(window.widget)
-		setTimeout("widget.performTransition();", 10);  
+		setTimeout("widget.performTransition();", 10);	
 }
 
 function switchPrefTab(tab) {

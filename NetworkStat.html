@@ -139,8 +139,13 @@ This Widget is Freeware and will always be. However, if you`d like to use some o
 			
 			<hr />
 			
-			<input type="checkbox" name="mail_notification_on" value="true" /> <span onclick="selectVal(this)">Notify IP-changes to</span><br />
-			<div id="notification_mail_setup_warning" class="padBox" style="display:block;"><img class="exclamIcon" src="Images/exclamationMark.png" alt="(!)" />You need to setup <a href="javascript:startMail()">Mail.app</a> to send notification mails.</div>
+			<input type="checkbox" name="mail_notification_on" value="true" /> <span onclick="selectVal(this)">Notify IP-changes to</span>
+			<div id="notification_mail_setup_warning" class="padBox" style="display:block;">
+			    <img class="exclamIcon" src="Images/exclamationMark.png" alt="(!)" />Because Apple removed the NSMailDelivery interface, you cannot use NetworkStat from your system to send emails. Sorry for this.
+			</div>
+			<div id="notification_mail_setup_warning" class="padBox" style="display:none;">
+			    <img class="exclamIcon" src="Images/exclamationMark.png" alt="(!)" />You need to setup <a href="javascript:startMail()">Mail.app</a> to send notification mails.
+			</div>
 			<div id="notification_mail_setup_input" style="display:none;">
 				<textarea name="notification_mail" rows="3" style="width:100%;"></textarea><br />
 				<span class="faded">(one address per line)</span><br />
