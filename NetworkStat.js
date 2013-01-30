@@ -8,7 +8,7 @@
 
 // Globals
 var _sections = new Array("options", "ping", "about");
-var _wanIPWebsite = "http://automation.whatismyip.com/n09230945.asp";
+var _wanIPWebsite = "http://ip.ossus.ch/";
 
 var original_timer = getTimer();
 var seconds_left = original_timer;						// seconds left till next refresh
